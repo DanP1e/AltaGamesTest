@@ -1,0 +1,76 @@
+{
+    "name": "GameControls",
+    "maps": [
+        {
+            "name": "Volume",
+            "id": "06aa8dc9-93f4-4689-a6f1-6ddc32d3b304",
+            "actions": [
+                {
+                    "name": "StartOfSplitting",
+                    "type": "Button",
+                    "id": "e56ac3b8-1eb8-49bb-9b00-5b3873a03ce4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EndOfSplitting",
+                    "type": "Button",
+                    "id": "5dc88c4e-d633-4725-b1aa-0ed0085da733",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f31715f-e597-41d4-99e3-310ff83bdd3b",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartOfSplitting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42a8db9f-ed39-4955-b7ba-20030c507179",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartOfSplitting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "784fd3bf-5594-4c3c-ab6d-0bc36f1ab20d",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EndOfSplitting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f500cf3f-5a3b-4f8f-a2b5-e942c7b243e5",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EndOfSplitting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
