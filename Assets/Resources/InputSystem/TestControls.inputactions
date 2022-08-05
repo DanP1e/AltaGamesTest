@@ -1,0 +1,82 @@
+{
+    "name": "TestControls",
+    "maps": [
+        {
+            "name": "AndroidTest",
+            "id": "87f5e291-6496-4846-b571-6de353b61b06",
+            "actions": [
+                {
+                    "name": "ScreenPress",
+                    "type": "Button",
+                    "id": "9f9b8f4d-4ba7-4e72-bc57-45f47b73369b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ScreenRelease",
+                    "type": "Button",
+                    "id": "3e122e45-5f64-4b4d-8010-f7e0fd377003",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "11e9cb9b-54d2-43e6-9589-d5d148c93640",
+                    "path": "<Touchscreen>/primaryTouch/indirectTouch",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d45bd47-511b-408e-9722-1bbcfac94d8c",
+                    "path": "<Touchscreen>/primaryTouch/indirectTouch",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PCTest",
+            "id": "8bd9044a-6e76-40fb-99da-7c23885d735e",
+            "actions": [
+                {
+                    "name": "ScreenPress",
+                    "type": "Button",
+                    "id": "ee90801c-a421-4be3-9270-ebfbf154f411",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ad4b92e0-f46f-4f5d-a93b-a163ffe00db5",
+                    "path": "<Mouse>/press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
