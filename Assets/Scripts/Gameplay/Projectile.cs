@@ -1,5 +1,4 @@
-﻿using InspectorAddons;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
@@ -7,9 +6,6 @@ namespace AltaGamesTest.Gameplay
 {
     public class Projectile : MonoBehaviour, IProjectile
     {
-        [SerializeField] private InterfaceComponent<IVolumeContainer> _volumeContainerComponent;
-        [SerializeField] private InterfaceComponent<ICriticalVolumeAchiever> _criticalVolumeAchieverComponent;
-
         private IVolumeContainer _volumeContainer;
         private ICriticalVolumeAchiever _criticalVolumeAchiever;
 
@@ -20,10 +16,12 @@ namespace AltaGamesTest.Gameplay
         public event UnityAction<IDestroyable> Destroyed;
 
         [Inject]
-        public void Container()
+        public void Container(
+            IVolumeContainer volumeContainer, 
+            ICriticalVolumeAchiever criticalVolumeAchiever)
         {
-            _volumeContainer = _volumeContainerComponent.Interface;
-            _criticalVolumeAchiever = _criticalVolumeAchieverComponent.Interface;
+            _volumeContainer = volumeContainer;
+            _criticalVolumeAchiever = criticalVolumeAchiever;
         }
 
         public void Destroy()

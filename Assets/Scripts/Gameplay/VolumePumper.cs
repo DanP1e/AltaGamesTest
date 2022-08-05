@@ -15,8 +15,14 @@ namespace AltaGamesTest.Gameplay
         private IProjectileProvider _projectileProvider;
         private Coroutine _pumpProcess;
 
-        private IVolumeContainer ProjectileContainer 
-            => _projectileProvider.GetProjectile().VolumeContainer;
+        private IVolumeContainer ProjectileContainer
+        {
+            get 
+            {
+                IProjectile projectile = _projectileProvider.GetLastProjectile();
+                return projectile == null ? null : projectile.VolumeContainer;
+            }
+        }                 
 
         [Inject]
         public void Construct(IVolumeContainer mainContainer, 
@@ -39,6 +45,8 @@ namespace AltaGamesTest.Gameplay
             if (_pumpProcess != null)               
                 StopCoroutine(_pumpProcess);
 
+            _pumpProcess = null;
+
             if (ProjectileContainer != null)
                 _pumpProcess = StartCoroutine(
                     StartPumpProcess(ProjectileContainer, _mainContainer));
@@ -49,7 +57,9 @@ namespace AltaGamesTest.Gameplay
             if (_pumpProcess != null)
                 StopCoroutine(_pumpProcess);
 
-            if(ProjectileContainer != null)
+            _pumpProcess = null;
+
+            if (ProjectileContainer != null)
                 _pumpProcess = StartCoroutine(
                     StartPumpProcess(_mainContainer, ProjectileContainer));
         }

@@ -12,17 +12,17 @@ namespace AltaGamesTest.Gameplay
         private IProjectile _projectile;
         private Context _context;
 
-        public IProjectile GetProjectile()
+        public IProjectile GetLastProjectile()
             => _projectile;
 
         [Inject]
         public void Construct(Context context)
         {
             _context = context;
-            SpawnProjectile();
+            SpawnNewProjectile();
         }
 
-        public IProjectile SpawnProjectile()
+        public void SpawnNewProjectile()
         {
             GameObject obj = _context.Container.InstantiatePrefab(_projectilePrefab.Object);
             obj.transform.position = transform.position;
@@ -30,14 +30,12 @@ namespace AltaGamesTest.Gameplay
             _projectile = (IProjectile)obj.GetComponent(typeof(IProjectile));          
             _projectile.Destroyed += UnsubscribeProjectile;
             _projectile.CriticalVolumeAchiever.CriticalVolumeAchieved += OnCriticalVolumeAchived;
-            return _projectile;
         }
 
         private void OnCriticalVolumeAchived(ICriticalVolumeAchiever achiver)
         {
-            //Debug.Log("Achived!!!");
-            //achiver.CriticalVolumeAchieved -= OnCriticalVolumeAchived;
-            //UnsubscribeProjectile(_projectile);
+            achiver.CriticalVolumeAchieved -= OnCriticalVolumeAchived;
+            UnsubscribeProjectile(_projectile);
         }
 
         private void UnsubscribeProjectile(IDestroyable projectile)

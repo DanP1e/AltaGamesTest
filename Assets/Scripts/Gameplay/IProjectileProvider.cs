@@ -2,6 +2,8 @@
 {
     public interface IProjectileProvider
     {
-        public IProjectile GetProjectile();
+        public IProjectile GetLastProjectile();
+
+        public void SpawnNewProjectile();
     }
 }

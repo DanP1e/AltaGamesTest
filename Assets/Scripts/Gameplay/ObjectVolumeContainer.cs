@@ -15,6 +15,8 @@ namespace AltaGamesTest.Gameplay
 
         public event UnityAction<ICriticalVolumeAchiever> CriticalVolumeAchieved;
 
+        public bool IsCriticalVolume => _avaliableVolume >= _criticalVolume;
+
         public float AvailableVolume => _avaliableVolume;
 
         public float CriticalVolume => _criticalVolume;
@@ -23,6 +25,7 @@ namespace AltaGamesTest.Gameplay
         public void Construct() 
         {
             _avaliableVolume = _startVolume;
+            UpdateShape();
         }
 
         public float ClaimVolume(float expectedPumpingVolume)
@@ -44,12 +47,15 @@ namespace AltaGamesTest.Gameplay
 
         private void CheckIsCriticalVolumeAchived() 
         {
-            if (_avaliableVolume >= _criticalVolume)
+            if (IsCriticalVolume)
                 CriticalVolumeAchieved?.Invoke(this);
         }
 
         private void UpdateShape()
         {
+            if (_scalingObject == null)
+                return;
+
             _scalingObject.localScale = Vector3.one * (AvailableVolume * _volumeSizeRatio);
         }
     }
