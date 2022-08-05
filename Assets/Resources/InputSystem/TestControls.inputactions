@@ -8,7 +8,7 @@
                 {
                     "name": "ScreenPress",
                     "type": "Button",
-                    "id": "9f9b8f4d-4ba7-4e72-bc57-45f47b73369b",
+                    "id": "83256ddb-bc26-460a-88ea-e08a38ce44da",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -17,7 +17,7 @@
                 {
                     "name": "ScreenRelease",
                     "type": "Button",
-                    "id": "3e122e45-5f64-4b4d-8010-f7e0fd377003",
+                    "id": "8b7779d4-2d86-4746-9dcf-1e27c36d6991",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -27,8 +27,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "11e9cb9b-54d2-43e6-9589-d5d148c93640",
-                    "path": "<Touchscreen>/primaryTouch/indirectTouch",
+                    "id": "0b3111c3-36b1-47e6-8021-edc7a8c27256",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -38,8 +38,8 @@
                 },
                 {
                     "name": "",
-                    "id": "0d45bd47-511b-408e-9722-1bbcfac94d8c",
-                    "path": "<Touchscreen>/primaryTouch/indirectTouch",
+                    "id": "512bfeae-6b5c-47ed-a021-bbd2fad81e3b",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
