@@ -300,6 +300,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1044897743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044897745}
+  - component: {fileID: 1044897744}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1044897744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044897743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e93b4d14d2ba674f848a1864bd4154e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: MainGameScene
+--- !u!4 &1044897745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044897743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 407.28616, y: 599.62823, z: -543.3072}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1093473197
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1093473200}
   - component: {fileID: 1093473199}
-  - component: {fileID: 1093473198}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -318,18 +362,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1093473198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093473197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &1093473199
 Light:
   m_ObjectHideFlags: 0
@@ -419,7 +451,6 @@ GameObject:
   - component: {fileID: 1371004598}
   - component: {fileID: 1371004597}
   - component: {fileID: 1371004596}
-  - component: {fileID: 1371004599}
   m_Layer: 5
   m_Name: Button (Legacy)
   m_TagString: Untagged
@@ -492,7 +523,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1371004599}
+      - m_Target: {fileID: 1044897744}
         m_TargetAssemblyTypeName: AltaGamesTest.Scenes.SceneLoader, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 1
@@ -542,19 +573,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371004594}
   m_CullTransparentMesh: 1
---- !u!114 &1371004599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371004594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e93b4d14d2ba674f848a1864bd4154e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: ControlsTest
 --- !u!1 &1406172907
 GameObject:
   m_ObjectHideFlags: 0
