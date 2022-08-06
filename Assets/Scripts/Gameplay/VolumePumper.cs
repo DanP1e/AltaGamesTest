@@ -1,5 +1,4 @@
 ﻿using AltaGamesTest.Interactions;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,6 +40,22 @@ namespace AltaGamesTest.Gameplay
             _gameControls.Enable();
         }
 
+        protected void OnDestroy()
+        {
+            _gameControls.Volume.StartOfSplitting.performed -= OnStartOfSplitting;
+            _gameControls.Volume.EndOfSplitting.performed -= OnEndOfSplitting;
+
+            _gameControls.Enable();
+
+            if (_projectileProvider == null)
+                return;
+
+            var lastProj = _projectileProvider.GetLastProjectile();
+
+            if(lastProj != null)
+                lastProj.Destroyed -= OnLastProjectileDestroyed;           
+        }
+
         private void OnEndOfSplitting(InputAction.CallbackContext obj)
         {
             if (enabled == false)
@@ -52,8 +67,20 @@ namespace AltaGamesTest.Gameplay
             _pumpProcess = null;
 
             if (ProjectileContainer != null)
+            {
+                _projectileProvider.GetLastProjectile().Destroyed += OnLastProjectileDestroyed;
                 _pumpProcess = StartCoroutine(
                     StartPumpProcess(ProjectileContainer, _mainContainer));
+            }
+        }
+
+        private void OnLastProjectileDestroyed(IDestroyable projectile)
+        {
+            projectile.Destroyed -= OnLastProjectileDestroyed;
+            if (_pumpProcess != null)
+                StopCoroutine(_pumpProcess);
+
+            _pumpProcess = null;
         }
 
         private void OnStartOfSplitting(InputAction.CallbackContext obj)
