@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using AltaGamesTest.Interactions;
+using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
 namespace AltaGamesTest.Gameplay
 {
-    public class ObjectVolumeContainer : MonoBehaviour, IVolumeContainer, ICriticalVolumeAchiever
+    public class ObjectVolumeContainer : StopableMonoBehaviour, IVolumeContainer, ICriticalVolumeAchiever
     {
         [SerializeField] private float _criticalVolume = 0.35f;
         [SerializeField] private float _startVolume = 4f;
@@ -14,6 +15,7 @@ namespace AltaGamesTest.Gameplay
         private float _avaliableVolume = 0;
 
         public event UnityAction<ICriticalVolumeAchiever> CriticalVolumeAchieved;
+        public event UnityAction<IVolumeContainer> VolumeChanged;
 
         public bool IsCriticalVolume => _avaliableVolume >= _criticalVolume;
 
@@ -35,6 +37,7 @@ namespace AltaGamesTest.Gameplay
             _avaliableVolume -= realPumpedVolume;
             CheckIsCriticalVolumeAchived();
             UpdateShape();
+            VolumeChanged?.Invoke(this);
             return realPumpedVolume;
         }    
 
@@ -43,6 +46,7 @@ namespace AltaGamesTest.Gameplay
             _avaliableVolume += volume;
             CheckIsCriticalVolumeAchived();
             UpdateShape();
+            VolumeChanged?.Invoke(this);
         }
 
         private void CheckIsCriticalVolumeAchived() 

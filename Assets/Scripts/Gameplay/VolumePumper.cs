@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AltaGamesTest.Interactions;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using Zenject;
 
 namespace AltaGamesTest.Gameplay
 {
-    public class VolumePumper : MonoBehaviour
+    public class VolumePumper : StopableMonoBehaviour
     {
         [SerializeField] private AnimationCurve _pumpingSpeedCurve;
 
@@ -42,6 +43,9 @@ namespace AltaGamesTest.Gameplay
 
         private void OnEndOfSplitting(InputAction.CallbackContext obj)
         {
+            if (enabled == false)
+                return;
+
             if (_pumpProcess != null)               
                 StopCoroutine(_pumpProcess);
 
@@ -54,6 +58,9 @@ namespace AltaGamesTest.Gameplay
 
         private void OnStartOfSplitting(InputAction.CallbackContext obj)
         {
+            if (enabled == false)
+                return;
+
             if (_pumpProcess != null)
                 StopCoroutine(_pumpProcess);
 
