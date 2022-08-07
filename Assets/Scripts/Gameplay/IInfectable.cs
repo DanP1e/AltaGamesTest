@@ -1,7 +1,13 @@
-﻿namespace AltaGamesTest.Gameplay
+﻿using UnityEngine.Events;
+
+namespace AltaGamesTest.Gameplay
 {
-    public interface IInfectable
+    public interface IInfectable : IDestroyable
     {
-        public void Infect();
+        event UnityAction<IInfectable> Infected;
+
+        bool IsInfected { get; }
+
+        void Infect();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AltaGamesTest.Interactions;
 using InspectorAddons;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -30,19 +31,16 @@ namespace AltaGamesTest.Gameplay
             if (enabled == false)
                 return;
 
+            if (_projectile != null)
+                throw new DoubleSpawnException();
+
             GameObject obj = _context.Container.InstantiatePrefab(_projectilePrefab.Object);
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
+            obj.transform.SetParent(transform);
             _projectile = (IProjectile)obj.GetComponent(typeof(IProjectile));          
             _projectile.Destroyed += UnsubscribeProjectile;
-            _projectile.CriticalVolumeAchiever.CriticalVolumeAchieved += OnCriticalVolumeAchived;
             NewProjectileSpawned?.Invoke(_projectile);
-        }
-
-        private void OnCriticalVolumeAchived(ICriticalVolumeAchiever achiver)
-        {
-            achiver.CriticalVolumeAchieved -= OnCriticalVolumeAchived;
-            UnsubscribeProjectile(_projectile);
         }
 
         private void UnsubscribeProjectile(IDestroyable projectile)

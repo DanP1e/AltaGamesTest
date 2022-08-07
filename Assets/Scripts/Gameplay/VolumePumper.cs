@@ -13,7 +13,7 @@ namespace AltaGamesTest.Gameplay
         private GameControls _gameControls;
         private IVolumeContainer _mainContainer;
         private IProjectileProvider _projectileProvider;
-        private Coroutine _pumpProcess;
+        private IContainersMover _containersMover;
 
         private IVolumeContainer ProjectileContainer
         {
@@ -25,11 +25,14 @@ namespace AltaGamesTest.Gameplay
         }                 
 
         [Inject]
-        public void Construct(IVolumeContainer mainContainer, 
-            IProjectileProvider projectileProvider)
+        public void Construct(
+            IVolumeContainer mainContainer, 
+            IProjectileProvider projectileProvider,
+            IContainersMover containersMover)
         {
             _mainContainer = mainContainer;
             _projectileProvider = projectileProvider;
+            _containersMover = containersMover;
         }
 
         protected void Awake()
@@ -46,67 +49,56 @@ namespace AltaGamesTest.Gameplay
             _gameControls.Volume.EndOfSplitting.performed -= OnEndOfSplitting;
 
             _gameControls.Enable();
-
-            if (_projectileProvider == null)
-                return;
-
-            var lastProj = _projectileProvider.GetLastProjectile();
-
-            if(lastProj != null)
-                lastProj.Destroyed -= OnLastProjectileDestroyed;           
         }
 
         private void OnEndOfSplitting(InputAction.CallbackContext obj)
         {
-            if (enabled == false)
-                return;
+            TryStopPumpProcess();
 
-            if (_pumpProcess != null)               
-                StopCoroutine(_pumpProcess);
-
-            _pumpProcess = null;
-
-            if (ProjectileContainer != null)
-            {
-                _projectileProvider.GetLastProjectile().Destroyed += OnLastProjectileDestroyed;
-                _pumpProcess = StartCoroutine(
+            if (IsCanStartPumpProcess()
+             && !_projectileProvider.GetLastProjectile().CriticalVolumeAchiever.IsCriticalVolume)
+                StartCoroutine(
                     StartPumpProcess(ProjectileContainer, _mainContainer));
-            }
-        }
-
-        private void OnLastProjectileDestroyed(IDestroyable projectile)
-        {
-            projectile.Destroyed -= OnLastProjectileDestroyed;
-            if (_pumpProcess != null)
-                StopCoroutine(_pumpProcess);
-
-            _pumpProcess = null;
         }
 
         private void OnStartOfSplitting(InputAction.CallbackContext obj)
         {
-            if (enabled == false)
-                return;
+            TryStopPumpProcess();
 
-            if (_pumpProcess != null)
-                StopCoroutine(_pumpProcess);
-
-            _pumpProcess = null;
-
-            if (ProjectileContainer != null)
-                _pumpProcess = StartCoroutine(
+            if (IsCanStartPumpProcess())
+                StartCoroutine(
                     StartPumpProcess(_mainContainer, ProjectileContainer));
         }
 
-        private IEnumerator StartPumpProcess(IVolumeContainer fromContainer, IVolumeContainer toContainer)
+        private bool IsCanStartPumpProcess()
+        {
+            return ProjectileContainer != null 
+                && enabled == true
+                && !_containersMover.IsMoving;
+        }
+
+        private void TryStopPumpProcess()
+        {
+            if (enabled == false)
+                return;
+
+            StopAllCoroutines();
+        }
+
+        private IEnumerator StartPumpProcess(
+            IVolumeContainer fromContainer,
+            IVolumeContainer toContainer)
         {
             float timer = 0;
-            while (true)
+            while (fromContainer != null
+                && toContainer != null
+                && ProjectileContainer != null
+                && !_containersMover.IsMoving
+                && enabled == true)
             {
-                if (fromContainer == null || toContainer == null)
-                    yield return null;
+                float volume = fromContainer
+                    .ClaimVolume(_pumpingSpeedCurve.Evaluate(timer) * Time.deltaTime);
 
-                float volume = fromContainer.ClaimVolume(_pumpingSpeedCurve.Evaluate(timer) * Time.deltaTime);
                 if (volume == 0)
                     break;
 

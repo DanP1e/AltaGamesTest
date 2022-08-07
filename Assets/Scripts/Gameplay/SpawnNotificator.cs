@@ -6,23 +6,26 @@ namespace AltaGamesTest.Gameplay
 {
     public class SpawnNotificator : MonoBehaviour
     {
-        private IDeliverer _deliverer;
+        private IInfectableObstaclesChecker _obstaclesChecker;
         private IProjectileProvider _projectileProvider;
 
         [Inject]
         public void Construct(
-            IDeliverer deliverer, 
+            IInfectableObstaclesChecker obstaclesChecker, 
             IProjectileProvider projectileProvider)
         {
-            _deliverer = deliverer;
+            _obstaclesChecker = obstaclesChecker;
             _projectileProvider = projectileProvider;
-            deliverer.DeliveredTo += OnDelivererDeliveredTo;
+            _obstaclesChecker.NewObstacleDetected += OnNewObstacleDetected;
         }
 
-        private void OnDelivererDeliveredTo(GameObject arg0)
+        private void OnNewObstacleDetected()
         {
-            _deliverer.DeliveredTo -= OnDelivererDeliveredTo;
-            _projectileProvider.SpawnNewProjectile();
+            try
+            {
+                _projectileProvider.SpawnNewProjectile();
+            }
+            catch (DoubleSpawnException) { }
         }
     }
 }

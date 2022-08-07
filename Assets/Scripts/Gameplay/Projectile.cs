@@ -31,7 +31,8 @@ namespace AltaGamesTest.Gameplay
 
         public void OnDestroy()
         {
-            Destroyed?.Invoke(this);
+            if(gameObject.scene.isLoaded)
+                Destroyed?.Invoke(this);
         }
     }
 }

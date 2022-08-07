@@ -8,7 +8,7 @@ using Zenject;
 
 namespace AltaGamesTest.Gameplay
 {
-    public class InfectableObstacle : InteractDummy, IInfectable, IDestroyable
+    public class InfectableObstacle : InteractDummy, IInfectable
     {
         [SerializeField] private Color _infectedColor = Color.yellow;
         [SerializeField] private InterfaceComponent<IColorProvider> _obstacleColorProviderComponent;
@@ -18,8 +18,12 @@ namespace AltaGamesTest.Gameplay
 
         private DiContainer _sceneContainer;
         private IColorProvider _obstacleColorProvider;
+        private bool _isInfected = false;
+
+        public bool IsInfected => _isInfected;
 
         public event UnityAction<IDestroyable> Destroyed;
+        public event UnityAction<IInfectable> Infected;
 
         [Inject]
         public void Construct(DiContainer sceneContainer) 
@@ -30,13 +34,20 @@ namespace AltaGamesTest.Gameplay
 
         public void Infect()
         {
+            if (_isInfected)
+                return;
+
             StartCoroutine(StartExplosionProcess(_explosionDelay));
             _obstacleColorProvider.Color = _infectedColor;
+            _isInfected = true;
+
+            Infected?.Invoke(this);
         }
 
         public void Destroy()
         {
             Destroy(gameObject);
+            Destroyed?.Invoke(this);
         }
 
         protected void OnDestroy()

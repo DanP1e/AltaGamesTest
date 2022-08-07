@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8037625239844050653}
   - component: {fileID: 8682854050886701948}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ObstaclesInfector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3543337946683481316}
   - component: {fileID: 4437387863796011546}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnNotificator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5331202194520194945}
   - component: {fileID: 6888433680283577458}
   - component: {fileID: 6661520752517845343}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 5624155927972726953}
   - component: {fileID: 3843330258538630574}
   - component: {fileID: 8319484308429809274}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
