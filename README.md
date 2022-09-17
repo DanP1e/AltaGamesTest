@@ -1,5 +1,4 @@
 # AltaGamesTest
-The game was created as test task for AltaGames!
 
 Gameplay
 On the screen, the ball is the player in the lower left corner, and the goal in the upper right corner, where the ball
